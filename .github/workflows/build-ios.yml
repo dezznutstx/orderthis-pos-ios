@@ -1,22 +1,29 @@
 name: Build iOS Simulator App
+
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
+
 jobs:
   build:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+
       - name: Install XcodeGen
         run: brew install xcodegen
+
       - name: Generate Xcode project
-        run: cd ios-port && xcodegen generate
+        run: xcodegen generate
+
       - name: Build simulator app
-        run: cd ios-port && xcodebuild -project OrderThisPOS.xcodeproj -scheme OrderThisPOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+        run: xcodebuild -project OrderThisPOS.xcodeproj -scheme OrderThisPOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+
       - name: Package simulator app
-        run: cd ios-port && ditto -c -k --sequesterRsrc --keepParent 'build/Build/Products/Debug-iphonesimulator/OrderThis POS.app' OrderThisPOS-iOS-Simulator.zip
+        run: ditto -c -k --sequesterRsrc --keepParent 'build/Build/Products/Debug-iphonesimulator/OrderThis POS.app' OrderThisPOS-iOS-Simulator.zip
+
       - uses: actions/upload-artifact@v4
         with:
           name: OrderThisPOS-iOS-Simulator
-          path: ios-port/OrderThisPOS-iOS-Simulator.zip
+          path: OrderThisPOS-iOS-Simulator.zip
