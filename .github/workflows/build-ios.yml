@@ -18,7 +18,7 @@ jobs:
         run: xcodegen generate
 
       - name: Build simulator app
-        run: xcodebuild -project OrderThisPOS.xcodeproj -scheme OrderThisPOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+        run: xcodebuild -project OrderThisPOS.xcodeproj -scheme OrderThisPOS -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO ASSETCATALOG_COMPILER_APPICON_NAME= build
 
       - name: Package simulator app
         run: ditto -c -k --sequesterRsrc --keepParent 'build/Build/Products/Debug-iphonesimulator/OrderThis POS.app' OrderThisPOS-iOS-Simulator.zip
