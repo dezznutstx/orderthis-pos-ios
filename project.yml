@@ -1,0 +1,24 @@
+name: OrderThisPOS
+options:
+  bundleIdPrefix: com.orderthis
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: ""
+targets:
+  OrderThisPOS:
+    type: application
+    platform: iOS
+    sources:
+      - Sources/OrderThisPOS
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.orderthis.pos
+        PRODUCT_NAME: OrderThis POS
+        INFOPLIST_KEY_CFBundleDisplayName: OrderThis POS
+        INFOPLIST_KEY_UIUserInterfaceStyle: Light
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        IPHONEOS_DEPLOYMENT_TARGET: "16.0"
